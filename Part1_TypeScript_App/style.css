@@ -1,0 +1,103 @@
+:root {
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --danger: #e74c3c;
+    --light: #f4f7f6;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light);
+    margin: 0;
+    color: #333;
+}
+
+header {
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+/* 状态框样式 */
+.status-box {
+    background: #fff;
+    border-left: 5px solid var(--secondary);
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 表单布局 */
+.form-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#inventory-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 默认两列 */
+    gap: 15px;
+}
+
+.form-group { display: flex; flex-direction: column; }
+.full-width { grid-column: span 2; }
+
+label { font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+input, select, textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 按钮组 */
+.button-group {
+    grid-column: span 2;
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: var(--secondary);
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover { opacity: 0.8; }
+.btn-clear { background: #95a5a6; }
+
+/* 响应式调整：手机端单列 */
+@media (max-width: 600px) {
+    #inventory-form { grid-template-columns: 1fr; }
+    .full-width, .button-group { grid-column: span 1; }
+    .button-group { flex-direction: column; }
+}
+
+/* 表格样式 */
+.table-responsive {
+    overflow-x: auto;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+th { background-color: var(--primary); color: white; }
+tr:nth-child(even) { background-color: #f9f9f9; }

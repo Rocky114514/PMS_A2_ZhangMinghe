@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSync Pro - Inventory Management (TS)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>TechSync Pro Inventory</h1>
+        <p>Standalone TypeScript System</p>
+    </header>
+
+    <main class="container">
+        <!-- 1. 状态反馈区 (代替 alert) -->
+        <div id="status-message" class="status-box">Ready to manage inventory.</div>
+
+        <!-- 2. 数据输入表单 -->
+        <section class="form-section">
+            <h2>Add / Update Item</h2>
+            <form id="inventory-form">
+                <div class="form-group">
+                    <label for="itemId">Item ID (Unique)*</label>
+                    <input type="text" id="itemId" required placeholder="e.g. TS-001">
+                </div>
+
+                <div class="form-group">
+                    <label for="itemName">Item Name*</label>
+                    <input type="text" id="itemName" required placeholder="e.g. Wireless Mouse">
+                </div>
+
+                <div class="form-group">
+                    <label for="itemCategory">Category*</label>
+                    <select id="itemCategory" required>
+                        <option value="">--Select Category--</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Tools">Tools</option>
+                        <option value="Miscellaneous">Miscellaneous</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="itemQuantity">Quantity*</label>
+                    <input type="number" id="itemQuantity" min="0" required placeholder="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="itemPrice">Price ($)*</label>
+                    <input type="number" id="itemPrice" min="0" step="0.01" required placeholder="0.00">
+                </div>
+
+                <div class="form-group">
+                    <label for="supplierName">Supplier Name*</label>
+                    <input type="text" id="supplierName" required placeholder="e.g. TechSupply Co.">
+                </div>
+
+                <div class="form-group">
+                    <label for="stockStatus">Stock Status*</label>
+                    <select id="stockStatus" required>
+                        <option value="In Stock">In Stock</option>
+                        <option value="Low Stock">Low Stock</option>
+                        <option value="Out of Stock">Out of Stock</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Popular Item?*</label>
+                    <div class="radio-group">
+                        <input type="radio" name="isPopular" value="Yes" id="popYes"> <label for="popYes">Yes</label>
+                        <input type="radio" name="isPopular" value="No" id="popNo" checked> <label for="popNo">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="itemComment">Comment</label>
+                    <textarea id="itemComment" rows="2" placeholder="Optional comments..."></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" id="btnAdd">Add Item</button>
+                    <button type="button" id="btnUpdate">Update (by Name)</button>
+                    <button type="reset" class="btn-clear">Clear Form</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 3. 搜索与过滤区 -->
+        <section class="action-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search by name...">
+                <button id="btnSearch">Search</button>
+            </div>
+            <div class="filter-buttons">
+                <button id="btnShowAll">Display All</button>
+                <button id="btnShowPopular">Show Popular Items</button>
+            </div>
+        </section>
+
+        <!-- 4. 数据显示区 -->
+        <section class="display-section">
+            <h2>Inventory Records</h2>
+            <div id="inventory-display" class="table-responsive">
+                <!-- 这里的表格将由 TypeScript 动态生成 -->
+                <p class="empty-msg">No items in the database.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 TechSync Pro | Student ID: XXXX</p>
+    </footer>
+
+    <!-- 引用编译后的 JS -->
+    <script src="dist/main.js"></script>
+</body>
+</html>
