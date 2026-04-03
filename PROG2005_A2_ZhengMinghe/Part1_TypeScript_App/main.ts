@@ -127,3 +127,18 @@ function updateItem(): void {
 // --- 7. 事件绑定 ---
 document.getElementById('btnAdd')?.addEventListener('click', addItem);
 document.getElementById('btnUpdate')?.addEventListener('click', updateItem);
+
+// 搜索功能
+function searchItems(): void {
+    const query = (document.getElementById('searchInput') as HTMLInputElement).value.toLowerCase();
+    const results = inventory.filter(i => i.name.toLowerCase().includes(query));
+    renderTable(results);
+}
+
+// 过滤 Popular
+document.getElementById('btnShowPopular')?.addEventListener('click', () => {
+    const populars = inventory.filter(i => i.isPopular === 'Yes');
+    renderTable(populars);
+});
+
+document.getElementById('btnSearch')?.addEventListener('click', searchItems);
