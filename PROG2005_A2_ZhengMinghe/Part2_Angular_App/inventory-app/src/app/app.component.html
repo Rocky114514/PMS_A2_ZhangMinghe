@@ -1,20 +1,14 @@
-<!-- 这是导航栏，方便你在页面间切换 -->
 <nav class="navbar">
   <div class="logo">TechSync Pro</div>
   <div class="nav-links">
     <a routerLink="/home" routerLinkActive="active">Home</a>
-    <a routerLink="/manage" routerLinkActive="active">Manage Inventory</a>
+    <a routerLink="/manage" routerLinkActive="active">Manage</a>
     <a routerLink="/search" routerLinkActive="active">Search</a>
-    <a routerLink="/security" routerLinkActive="active">Security Analysis</a>
+    <a routerLink="/security" routerLinkActive="active">Security</a>
     <a routerLink="/help" routerLinkActive="active">Help</a>
   </div>
 </nav>
 
-<!-- 这是关键！所有的页面组件（Home, Manage等）都会在这里渲染 -->
 <main class="content-area">
   <router-outlet></router-outlet>
 </main>
-
-<footer>
-  <p>&copy; 2024 TechSync Pro | Programming Mobile Systems</p>
-</footer>

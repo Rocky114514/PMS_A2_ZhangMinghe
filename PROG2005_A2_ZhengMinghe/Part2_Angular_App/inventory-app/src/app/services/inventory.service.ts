@@ -1,37 +1,27 @@
 import { Injectable } from '@angular/core';
-import { InventoryItem } from '../item.model';
+import { InventoryItem } from '../models/item.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class InventoryService {
-  // 核心数据存储（在浏览器打开期间有效）
   private inventory: InventoryItem[] = [];
 
   constructor() {
-    // 预置一条测试数据，方便稍后测试搜索和显示页面
+    // 初始测试数据
     this.inventory.push({
-      id: 'TS-001', name: 'Sample Item', category: 'Electronics',
-      quantity: 5, price: 99.99, supplierName: 'TechCorp',
-      stockStatus: 'In Stock', isPopular: 'Yes', comment: 'Initial sample'
+      id: 'TS-001', name: 'Sample Tablet', category: 'Electronics',
+      quantity: 5, price: 499, supplierName: 'TechSupply',
+      stockStatus: 'In Stock', isPopular: 'Yes'
     });
   }
 
-  // 获取所有商品
-  getItems(): InventoryItem[] {
-    return this.inventory;
-  }
+  getItems(): InventoryItem[] { return this.inventory; }
 
-  // 添加新商品（含 ID 唯一性检查）
   addItem(item: InventoryItem): boolean {
-    if (this.inventory.some(i => i.id === item.id)) {
-      return false; // ID 重复
-    }
+    if (this.inventory.some(i => i.id === item.id)) return false;
     this.inventory.push(item);
     return true;
   }
 
-  // 按名称更新商品 (作业要求)
   updateItemByName(name: string, updatedData: Partial<InventoryItem>): boolean {
     const index = this.inventory.findIndex(i => i.name.toLowerCase() === name.toLowerCase());
     if (index !== -1) {
@@ -41,8 +31,11 @@ export class InventoryService {
     return false;
   }
 
-  // 按名称删除商品 (带确认逻辑将在组件中实现)
   deleteItemByName(name: string): void {
     this.inventory = this.inventory.filter(i => i.name.toLowerCase() !== name.toLowerCase());
+  }
+
+  getPopularItems(): InventoryItem[] {
+    return this.inventory.filter(i => i.isPopular === 'Yes');
   }
 }

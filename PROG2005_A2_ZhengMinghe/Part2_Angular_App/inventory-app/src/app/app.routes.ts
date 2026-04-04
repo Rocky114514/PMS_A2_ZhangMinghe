@@ -1,11 +1,15 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ManageComponent } from './components/manage/manage.component';
-// ... 其他组件导入
+import { SearchComponent } from './components/search/search.component';
+import { SecurityComponent } from './components/security/security.component';
+import { HelpComponent } from './components/help/help.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'manage', component: ManageComponent },
-  // ... 其他路由
-  { path: '', redirectTo: '/home', pathMatch: 'full' } // 默认进入首页
+  { path: 'search', component: SearchComponent },
+  { path: 'security', component: SecurityComponent },
+  { path: 'help', component: HelpComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

@@ -1,1 +1,51 @@
-<p>security works!</p>
+<div class="container security-page">
+  <header class="security-header">
+    <h1>Privacy and Security Analysis</h1>
+    <p class="subtitle">Compliance with ULO4: Mobile & Web System Requirements</p>
+  </header>
+
+  <section class="analysis-section">
+    <h2>1. Data Integrity and Input Validation</h2>
+    <p>
+      In <strong>TechSync Pro</strong>, we prioritize data integrity by utilizing Angular's <strong>Reactive Forms</strong>. 
+      This approach allows for synchronous and asynchronous validation. Specifically:
+    </p>
+    <ul>
+      <li><strong>Type Enforcement:</strong> We use regular expression patterns (<code>Validators.pattern</code>) to ensure that numeric fields like <em>Price</em> and <em>Quantity</em> do not accept alphabetic characters, preventing logic errors and potential injection vulnerabilities.</li>
+      <li><strong>Sanitization:</strong> Angular automatically sanitizes values to prevent <strong>Cross-Site Scripting (XSS)</strong> attacks, ensuring that malicious scripts cannot be executed within the browser session.</li>
+    </ul>
+  </section>
+
+  <section class="analysis-section">
+    <h2>2. Session-Based Data Persistence</h2>
+    <p>
+      Following the assessment brief, this application functions without a server-side backend. Data is stored within a <strong>Service-managed singleton</strong>.
+    </p>
+    <p>
+      <em>Security Consideration:</em> While this protects user data from being intercepted over a network, the data resides in the browser's memory. To enhance privacy, we implement clear state management where data is cleared once the browser session ends, adhering to the principle of <strong>Ephemeral Storage</strong>.
+    </p>
+  </section>
+
+  <section class="analysis-section">
+    <h2>3. Privacy and The Principle of Least Privilege</h2>
+    <p>
+      In a mobile context, privacy is paramount. Our app respects user privacy by:
+    </p>
+    <ul>
+      <li><strong>Minimal Data Collection:</strong> Only essential inventory fields are required. We do not request access to sensitive mobile hardware (Camera, GPS, or Contacts) as they are not required for core functionality.</li>
+      <li><strong>Supplier Privacy:</strong> Sensitive supplier information and internal comments are kept local to the session, preventing accidental exposure to unauthorized third parties.</li>
+    </ul>
+  </section>
+
+  <section class="analysis-section">
+    <h2>4. Future Security Recommendations</h2>
+    <p>
+      To transition this prototype into a production-ready mobile application, the following security measures would be implemented:
+    </p>
+    <ul>
+      <li><strong>HTTPS/TLS:</strong> Encrypting data in transit to prevent Man-in-the-Middle (MitM) attacks.</li>
+      <li><strong>JWT Authentication:</strong> Secure user login and authorization using JSON Web Tokens.</li>
+      <li><strong>Encrypted Local Storage:</strong> Using <code>SecureStorage</code> plugins if the app is deployed on mobile platforms via Capacitor or Cordova.</li>
+    </ul>
+  </section>
+</div>

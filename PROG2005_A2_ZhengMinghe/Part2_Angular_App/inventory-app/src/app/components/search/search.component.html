@@ -1,1 +1,37 @@
-<p>search works!</p>
+<div class="container">
+  <h2>Search Inventory</h2>
+
+  <div class="search-controls">
+    <input 
+      type="text" 
+      [(ngModel)]="searchQuery" 
+      (input)="onSearch()" 
+      placeholder="Enter item name..."
+      class="search-input"
+    >
+    <div class="filter-btns">
+      <button (click)="showAll()" class="btn-secondary">Show All</button>
+      <button (click)="showPopular()" class="btn-popular">Show Popular Items</button>
+    </div>
+  </div>
+
+  <div class="results-table">
+    <table *ngIf="filteredItems.length > 0; else noResults">
+      <thead>
+        <tr><th>ID</th><th>Name</th><th>Category</th><th>Price</th><th>Popular?</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredItems">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.category }}</td>
+          <td>${{ item.price }}</td>
+          <td>{{ item.isPopular }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noResults>
+      <p class="empty-msg">No items found matching your criteria.</p>
+    </ng-template>
+  </div>
+</div>
