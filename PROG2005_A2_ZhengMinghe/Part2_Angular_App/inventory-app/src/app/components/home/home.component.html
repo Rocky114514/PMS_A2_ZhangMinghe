@@ -1,1 +1,27 @@
-<p>home works!</p>
+<div class="container home-page">
+  <header class="hero">
+    <h1>Welcome to TechSync Pro</h1>
+    <p class="subtitle">Efficient Digital Inventory Management System</p>
+  </header>
+
+  <section class="mission">
+    <h2>Our Purpose</h2>
+    <p>
+      TechSync Pro is designed to help modern tech retailers manage their complex database of electronics, 
+      furniture, and tools. Our standalone system ensures data integrity and provides an intuitive 
+      interface for seamless inventory tracking.
+    </p>
+  </section>
+
+  <!-- 仪表盘：展示当前库存概览 -->
+  <section class="dashboard">
+    <div class="stat-card">
+      <h3>Total Items</h3>
+      <p class="count">{{ displayItems.length }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Quick Action</h3>
+      <button routerLink="/manage" class="btn-primary">Start Managing</button>
+    </div>
+  </section>
+</div>
