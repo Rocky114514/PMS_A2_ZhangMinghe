@@ -1,1 +1,45 @@
-<p>manage works!</p>
+<div class="container">
+  <h2>Inventory Management</h2>
+  
+  <!-- 状态反馈区 -->
+  <div class="status-bar" *ngIf="statusMessage">{{ statusMessage }}</div>
+
+  <!-- 管理表单 -->
+  <form [formGroup]="itemForm" class="manage-form">
+    <div class="input-grid">
+      <input formControlName="id" placeholder="Item ID*">
+      <input formControlName="name" placeholder="Item Name*">
+      <select formControlName="category">
+        <option value="">--Category--</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Tools">Tools</option>
+      </select>
+      <!-- 验证数字错误提示 -->
+      <input formControlName="quantity" type="text" placeholder="Quantity*">
+      <input formControlName="price" type="text" placeholder="Price*">
+      <input formControlName="supplierName" placeholder="Supplier*">
+    </div>
+    
+    <div class="form-actions">
+      <button (click)="onAdd()" class="btn-add">Add New Item</button>
+      <button (click)="onUpdate()" class="btn-update">Update by Name</button>
+    </div>
+  </form>
+
+  <!-- 当前库存列表 -->
+  <table class="inventory-table">
+    <thead>
+      <tr><th>Name</th><th>Qty</th><th>Price</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of inventoryList">
+        <td>{{ item.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.price }}</td>
+        <td><button (click)="onDelete(item.name)" class="btn-danger">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
