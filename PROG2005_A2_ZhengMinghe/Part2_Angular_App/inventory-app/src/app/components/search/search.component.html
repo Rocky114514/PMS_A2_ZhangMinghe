@@ -1,37 +1,40 @@
-<div class="container">
-  <h2>Search Inventory</h2>
-
-  <div class="search-controls">
-    <input 
-      type="text" 
-      [(ngModel)]="searchQuery" 
-      (input)="onSearch()" 
-      placeholder="Enter item name..."
-      class="search-input"
-    >
-    <div class="filter-btns">
-      <button (click)="showAll()" class="btn-secondary">Show All</button>
-      <button (click)="showPopular()" class="btn-popular">Show Popular Items</button>
+<div class="container text-center">
+  <h2 class="display-title">Inventory Search</h2>
+  
+  <div class="search-box-container">
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Search by name..." class="search-bar">
+    <div class="filter-group">
+      <button (click)="showAll()" class="btn-filter">All</button>
+      <button (click)="showPopular()" class="btn-filter highlight">Popular</button>
     </div>
   </div>
 
-  <div class="results-table">
-    <table *ngIf="filteredItems.length > 0; else noResults">
+  <!-- 回归表格形式 -->
+  <div class="table-wrapper">
+    <table class="inventory-table">
       <thead>
-        <tr><th>ID</th><th>Name</th><th>Category</th><th>Price</th><th>Popular?</th></tr>
+        <tr>
+          <th>ID</th>
+          <th>Item Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Popular?</th>
+        </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of filteredItems">
           <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
+          <td class="bold">{{ item.name }}</td>
           <td>{{ item.category }}</td>
-          <td>${{ item.price }}</td>
-          <td>{{ item.isPopular }}</td>
+          <td class="price-col">${{ item.price }}</td>
+          <td>{{ item.stockStatus }}</td>
+          <td>
+            <span *ngIf="item.isPopular === 'Yes'" class="pop-dot">● Popular</span>
+            <span *ngIf="item.isPopular === 'No'">No</span>
+          </td>
         </tr>
       </tbody>
     </table>
-    <ng-template #noResults>
-      <p class="empty-msg">No items found matching your criteria.</p>
-    </ng-template>
   </div>
 </div>

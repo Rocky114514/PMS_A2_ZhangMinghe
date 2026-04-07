@@ -1,45 +1,62 @@
-<div class="container">
-  <h2>Inventory Management</h2>
-  
-  <!-- 状态反馈区 -->
-  <div class="status-bar" *ngIf="statusMessage">{{ statusMessage }}</div>
+<div class="container animate-bottom">
+  <div class="glass-card">
+    <h2>Inventory Management</h2>
+    <div class="status-bar" *ngIf="statusMessage">{{ statusMessage }}</div>
 
-  <!-- 管理表单 -->
-  <form [formGroup]="itemForm" class="manage-form">
-    <div class="input-grid">
-      <input formControlName="id" placeholder="Item ID*">
-      <input formControlName="name" placeholder="Item Name*">
-      <select formControlName="category">
-        <option value="">--Category--</option>
-        <option value="Electronics">Electronics</option>
-        <option value="Furniture">Furniture</option>
-        <option value="Clothing">Clothing</option>
-        <option value="Tools">Tools</option>
-      </select>
-      <!-- 验证数字错误提示 -->
-      <input formControlName="quantity" type="text" placeholder="Quantity*">
-      <input formControlName="price" type="text" placeholder="Price*">
-      <input formControlName="supplierName" placeholder="Supplier*">
-    </div>
-    
-    <div class="form-actions">
-      <button (click)="onAdd()" class="btn-add">Add New Item</button>
-      <button (click)="onUpdate()" class="btn-update">Update by Name</button>
-    </div>
-  </form>
+    <form [formGroup]="itemForm" class="styled-form">
+      <div class="input-grid">
+        <input formControlName="id" placeholder="Item ID*">
+        <input formControlName="name" placeholder="Item Name*">
+        <select formControlName="category">
+          <option value="">--Category--</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Furniture">Furniture</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Tools">Tools</option>
+        </select>
+        <input formControlName="quantity" type="text" placeholder="Qty*">
+        <input formControlName="price" type="text" placeholder="Price*">
+        <input formControlName="supplierName" placeholder="Supplier*">
+      </div>
+      
+      <div class="form-actions">
+        <button (click)="onAdd()" class="btn-primary-gradient">Add New Item</button>
+        <button (click)="onUpdate()" class="btn-outline">Update by Name</button>
+      </div>
+    </form>
+  </div>
 
-  <!-- 当前库存列表 -->
-  <table class="inventory-table">
-    <thead>
-      <tr><th>Name</th><th>Qty</th><th>Price</th><th>Action</th></tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of inventoryList">
-        <td>{{ item.name }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>${{ item.price }}</td>
-        <td><button (click)="onDelete(item.name)" class="btn-danger">Delete</button></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-section">
+    <h3>Current Stock Database</h3>
+    <div class="table-wrapper">
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Pop</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of inventoryList">
+            <td class="bold">{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td><span class="badge">{{ item.category }}</span></td>
+            <td>{{ item.quantity }}</td>
+            <td class="price-col">${{ item.price }}</td>
+            <td>{{ item.stockStatus }}</td>
+            <td>{{ item.isPopular }}</td>
+            <td>
+              <button (click)="onDelete(item.name)" class="btn-delete-small">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

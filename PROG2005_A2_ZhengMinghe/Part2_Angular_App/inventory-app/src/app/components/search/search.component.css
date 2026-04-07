@@ -1,0 +1,24 @@
+.search-box-container { margin-bottom: 40px; }
+.search-bar {
+  width: 100%;
+  max-width: 500px;
+  padding: 15px 25px;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+
+.filter-group { margin-top: 15px; display: flex; justify-content: center; gap: 10px; }
+.btn-filter { background: white; padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; }
+.btn-filter.highlight { background: #fffbe6; color: #faad14; border: 1px solid #ffe58f; }
+
+.pop-dot { color: #faad14; font-weight: 700; font-size: 0.8rem; }
+
+/* 复用 Manage 页面的表格样式，保持视觉统一 */
+.table-wrapper {
+  background: white;
+  border-radius: 20px;
+  overflow-x: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  text-align: left;
+}
