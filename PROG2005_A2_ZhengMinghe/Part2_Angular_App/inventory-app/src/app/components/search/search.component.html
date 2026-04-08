@@ -1,21 +1,20 @@
-//24833060-202300408073-张洺赫MingheZhang
-<!-- Search View: Dedicated page for item retrieval and advanced filtering requirements (Assessment Page 2) -->
-<div class="container text-center">
+<div class="container text-center animate-fade">
   <h2 class="display-title">Inventory Search</h2>
   
-  <!-- Interactive Search Area: Implements real-time filtering to enhance User Experience (ULO2) -->
   <div class="search-box-container">
-    <!-- Two-way Binding: Synchronizes user input with the logic to provide immediate search results -->
-    <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Search by name..." class="search-bar">
-    
-    <!-- Filter Controls: Provides specific options to toggle between the full database and popular items -->
+    <input 
+      type="text" 
+      [(ngModel)]="searchQuery" 
+      (input)="onSearch()" 
+      placeholder="Search by name..." 
+      class="search-bar"
+    >
     <div class="filter-group">
-      <button (click)="showAll()" class="btn-filter">All</button>
-      <button (click)="showPopular()" class="btn-filter highlight">Popular</button>
+      <button (click)="showAll()" class="btn-filter">All Items</button>
+      <button (click)="showPopular()" class="btn-filter highlight">★ Popular Items</button>
     </div>
   </div>
 
-  <!-- Data Table Architecture: Presents inventory records in a comparative layout for high-density information display -->
   <div class="table-wrapper">
     <table class="inventory-table">
       <thead>
@@ -29,22 +28,22 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Dynamic Iteration: Renders rows based on the filtered data structure maintained in the service -->
         <tr *ngFor="let item of filteredItems">
-          <td>{{ item.id }}</td>
-          <td class="bold">{{ item.name }}</td>
-          <td>{{ item.category }}</td>
-          <td class="price-col">${{ item.price }}</td>
+          <td class="id-col">{{ item.id }}</td>
+          <td class="bold-text">{{ item.name }}</td>
+          <td><span class="badge">{{ item.category }}</span></td>
+          <td class="price-text">${{ item.price }}</td>
           <td>{{ item.stockStatus }}</td>
           <td>
-            <!-- Conditional Rendering: Uses visual cues (dot flag) to distinguish popular items per brief specifications -->
-            <span *ngIf="item.isPopular === 'Yes'" class="pop-dot">● Popular</span>
-            <span *ngIf="item.isPopular === 'No'">No</span>
+            <span *ngIf="item.isPopular === 'Yes'" class="pop-indicator">● Popular</span>
+            <span *ngIf="item.isPopular === 'No'" class="no-indicator">No</span>
           </td>
         </tr>
       </tbody>
     </table>
+    
+    <div *ngIf="filteredItems.length === 0" class="no-results">
+      No items found matching your search.
+    </div>
   </div>
 </div>
-
-<!-- Responsive Note: The table-wrapper handles overflow to ensure usability on narrow mobile screens (ULO1/ULO2) -->

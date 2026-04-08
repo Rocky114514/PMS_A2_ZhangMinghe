@@ -1,4 +1,4 @@
-//24833060-202300408073-张洺赫MingheZhang
+<!--24833060-202300408073-张洺赫MingheZhang -->
 <!-- Main Management Container: Provides an interactive interface for inventory CRUD operations -->
 <div class="container animate-bottom">
   
@@ -13,6 +13,23 @@
     <form [formGroup]="itemForm" class="styled-form">
       
       <!-- Responsive Grid: Organizes mandatory fields into a mobile-friendly layout (ULO2) -->
+      <div class="form-actions">
+        <button (click)="onAdd()" class="btn-primary-gradient">Add New Item</button>
+        <button (click)="toggleRenameOption()" class="btn-outline">Update / Rename</button>
+      </div>
+
+      <div *ngIf="showRenameUI" class="rename-panel animate-fade">
+        <label class="checkbox-label">
+          <input type="checkbox" [(ngModel)]="isRenameActive" [ngModelOptions]="{standalone: true}"> Rename this item?
+        </label>
+        
+        <div *ngIf="isRenameActive" class="new-name-input-group">
+          <input type="text" placeholder="Enter New Name" [(ngModel)]="tempNewName" [ngModelOptions]="{standalone: true}" class="new-name-field">
+          <button (click)="onFinalUpdate()" class="btn-confirm-rename">Save Changes</button>
+        </div>
+        
+        <button *ngIf="!isRenameActive" (click)="onFinalUpdate()" class="btn-simple-update">Update Info Only</button>
+      </div>
       <div class="input-grid">
         <div class="input-box"><label>Item ID</label><input formControlName="id" placeholder="ID*"></div>
         <div class="input-box"><label>Item Name</label><input formControlName="name" placeholder="Name*"></div>
@@ -35,7 +52,7 @@
       <!-- Operation Controls: Implements standard 'Add' and the specific 'Update by Name' requirement -->
       <div class="form-actions">
         <button (click)="onAdd()" class="btn-primary-gradient">Add New Item</button>
-        <button (click)="onUpdate()" class="btn-outline">Update by Name</button>
+        <button (click)="toggleRenameOption()" class="btn-outline">Update / Rename</button>
       </div>
     </form>
   </div>

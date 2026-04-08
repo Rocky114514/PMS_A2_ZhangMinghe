@@ -85,8 +85,16 @@
                 <!-- Functional Buttons: Trigger TypeScript event listeners for CRUD operations -->
                 <div class="button-group">
                     <button type="button" id="btnAdd" class="btn-primary">Add Item</button>
-                    <!-- Requirement: Updating should be executed based on the Item Name -->
                     <button type="button" id="btnUpdate" class="btn-secondary">Update (by Name)</button>
+                    <div id="rename-container" style="margin-top: 15px; padding: 10px; border: 1px dashed #3498db; border-radius: 8px; display: none; background: #ebf5fb;">
+                        <label style="font-size: 0.8rem; color: #2980b9;">
+                            <input type="checkbox" id="enableRename"> Enable Renaming?
+                        </label>
+                        <div id="new-name-box" style="margin-top: 10px; display: none;">
+                            <label for="newItemName" style="font-size: 0.8rem;">Enter New Name:</label>
+                            <input type="text" id="newItemName" placeholder="Type new name here...">
+                        </div>
+                    </div>
                     <button type="reset" class="btn-clear">Clear Form</button>
                 </div>
             </form>

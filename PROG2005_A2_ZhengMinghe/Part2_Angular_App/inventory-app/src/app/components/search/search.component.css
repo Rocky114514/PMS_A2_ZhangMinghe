@@ -1,33 +1,112 @@
-/*24833060-202300408073-z张洺赫MingheZhang*/
-/* Search Layout: Establishes clear vertical spacing for the search interface components */
-.search-box-container { margin-bottom: 40px; }
-
-/* Search Bar: Pill-shaped input to enhance modern aesthetic and User Experience (UX) */
-.search-bar {
-  width: 100%;
-  max-width: 500px;
-  padding: 15px 25px;
-  border-radius: 30px;
-  border: 1px solid #ddd;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+/* 标题样式 */
+.display-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Filter UI: Fulfills requirement for an item search page with specific filtering options */
-.filter-group { margin-top: 15px; display: flex; justify-content: center; gap: 10px; }
-.btn-filter { background: white; padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; }
+/* 搜索框美化 */
+.search-box-container {
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
 
-/* High-contrast styling for the 'Popular' filter to help users distinguish priority items */
-.btn-filter.highlight { background: #fffbe6; color: #faad14; border: 1px solid #ffe58f; }
-
-/* Semantic Dot: Provides a quick visual cue to flag popular items within the results list */
-.pop-dot { color: #faad14; font-weight: 700; font-size: 0.8rem; }
-
-/* Table Architecture: Implements responsive overflow to support narrow mobile screens (ULO2) */
-/* Maintains visual consistency across the entire management system for a unified brand feel */
-.table-wrapper {
+.search-bar {
+  width: 100%;
+  max-width: 550px;
+  padding: 16px 30px;
+  border-radius: 50px;
   background: white;
-  border-radius: 20px;
-  overflow-x: auto;
+  border: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  font-size: 1.1rem;
+  transition: 0.3s;
+}
+
+.search-bar:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(118, 75, 162, 0.15);
+  border-color: #764ba2;
+}
+
+/* 过滤器按钮 */
+.filter-group {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-filter {
+  background: white;
+  color: #636e72;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  transition: 0.3s;
+}
+
+.btn-filter:hover {
+  background: #f8f9fa;
+  transform: translateY(-1px);
+}
+
+.btn-filter.highlight {
+  background: #fffbe6;
+  color: #faad14;
+  border: 1px solid #ffe58f;
+}
+
+/* 表格容器：实现磨砂玻璃效果 */
+.table-wrapper {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(15px);
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+  border: 1px solid white;
+  overflow-x: auto;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
   text-align: left;
+}
+
+.inventory-table th {
+  padding: 20px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #b2bec3;
+  letter-spacing: 1px;
+}
+
+.inventory-table td {
+  padding: 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.02);
+  font-size: 0.95rem;
+}
+
+/* 文字与装饰 */
+.bold-text { font-weight: 700; color: #2d3436; }
+.price-text { font-weight: 800; color: #764ba2; }
+.badge { background: #f0f2f5; padding: 4px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; }
+.pop-indicator { color: #faad14; font-weight: 700; }
+.no-results { padding: 40px; color: #b2bec3; font-style: italic; }
+
+.animate-fade {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
