@@ -11,9 +11,11 @@ import { InventoryItem } from '../../models/item.model';
  * with multiple filtering options (Assessment Page 2).
  */
 @Component({
-  selector: 'app-search', standalone: true,
-  imports: [CommonModule, FormsModule], // FormsModule enables Template-driven features for the search input
-  templateUrl: './search.component.html'
+  selector: 'app-search',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './search.component.html',
+  styleUrl: './search.component.css' 
 })
 export class SearchComponent implements OnInit {
   // Application state for the search query and the subset of filtered data

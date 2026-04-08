@@ -13,10 +13,7 @@
     <form [formGroup]="itemForm" class="styled-form">
       
       <!-- Responsive Grid: Organizes mandatory fields into a mobile-friendly layout (ULO2) -->
-      <div class="form-actions">
-        <button (click)="onAdd()" class="btn-primary-gradient">Add New Item</button>
-        <button (click)="toggleRenameOption()" class="btn-outline">Update / Rename</button>
-      </div>
+      
 
       <div *ngIf="showRenameUI" class="rename-panel animate-fade">
         <label class="checkbox-label">
