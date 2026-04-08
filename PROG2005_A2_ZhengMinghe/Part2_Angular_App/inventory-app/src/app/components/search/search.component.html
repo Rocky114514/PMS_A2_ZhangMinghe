@@ -1,6 +1,9 @@
-<div class="container text-center animate-fade">
+<!-- container 让内容居中，animate-fade 是进入动画 -->
+<div class="container search-page animate-fade">
+  
   <h2 class="display-title">Inventory Search</h2>
   
+  <!-- 搜索控制区域 -->
   <div class="search-box-container">
     <input 
       type="text" 
@@ -10,11 +13,12 @@
       class="search-bar"
     >
     <div class="filter-group">
-      <button (click)="showAll()" class="btn-filter">All Items</button>
-      <button (click)="showPopular()" class="btn-filter highlight">★ Popular Items</button>
+      <button (click)='showAll()' class="btn-filter">All Items</button>
+      <button (click)='showPopular()' class="btn-filter highlight">★ Popular Items</button>
     </div>
   </div>
 
+  <!-- 表格区域：外层 wrapper 负责圆角和阴影 -->
   <div class="table-wrapper">
     <table class="inventory-table">
       <thead>
@@ -30,20 +34,21 @@
       <tbody>
         <tr *ngFor="let item of filteredItems">
           <td class="id-col">{{ item.id }}</td>
-          <td class="bold-text">{{ item.name }}</td>
+          <td class="name-text">{{ item.name }}</td>
           <td><span class="badge">{{ item.category }}</span></td>
           <td class="price-text">${{ item.price }}</td>
           <td>{{ item.stockStatus }}</td>
           <td>
-            <span *ngIf="item.isPopular === 'Yes'" class="pop-indicator">● Popular</span>
-            <span *ngIf="item.isPopular === 'No'" class="no-indicator">No</span>
+            <span *ngIf="item.isPopular === 'Yes'" class="pop-dot">● Popular</span>
+            <span *ngIf="item.isPopular === 'No'" class="no-pop">No</span>
           </td>
         </tr>
       </tbody>
     </table>
     
+    <!-- 兜底提示 -->
     <div *ngIf="filteredItems.length === 0" class="no-results">
-      No items found matching your search.
+      No items found in our vault.
     </div>
   </div>
 </div>
