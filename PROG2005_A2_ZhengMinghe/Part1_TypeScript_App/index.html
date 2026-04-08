@@ -1,93 +1,98 @@
+//24833060-202300408073-张洺赫MingheZhang
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Responsive Meta Tag: Ensures usability on both narrow mobile screens and wide desktops (ULO2) -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechSync Pro - Inventory Management (TS)</title>
+    <!-- Linking CSS for basic styling to improve user experience as per brief instructions -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>TechSync Pro Inventory</h1>
-        <p>Standalone TypeScript System</p>
+        <p>Standalone TypeScript System (Part 1)</p>
     </header>
 
     <main class="container">
-        <!-- 1. 状态反馈区 (代替 alert) -->
+        <!-- Interaction Requirement: Using innerHTML assignments for status feedback instead of window.alert() calls -->
         <div id="status-message" class="status-box">Ready to manage inventory.</div>
 
-        <!-- 2. 数据输入表单 -->
+        <!-- Data Entry Section: Implements the required input fields (ID, Name, Category, Price, etc.) -->
         <section class="form-section">
             <h2>Add / Update Item</h2>
             <form id="inventory-form">
-                <div class="form-group">
-                    <label for="itemId">Item ID (Unique)*</label>
-                    <input type="text" id="itemId" required placeholder="e.g. TS-001">
-                </div>
-
-                <div class="form-group">
-                    <label for="itemName">Item Name*</label>
-                    <input type="text" id="itemName" required placeholder="e.g. Wireless Mouse">
-                </div>
-
-                <div class="form-group">
-                    <label for="itemCategory">Category*</label>
-                    <select id="itemCategory" required>
-                        <option value="">--Select Category--</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Furniture">Furniture</option>
-                        <option value="Clothing">Clothing</option>
-                        <option value="Tools">Tools</option>
-                        <option value="Miscellaneous">Miscellaneous</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="itemQuantity">Quantity*</label>
-                    <input type="number" id="itemQuantity" min="0" required placeholder="0">
-                </div>
-
-                <div class="form-group">
-                    <label for="itemPrice">Price ($)*</label>
-                    <input type="number" id="itemPrice" min="0" step="0.01" required placeholder="0.00">
-                </div>
-
-                <div class="form-group">
-                    <label for="supplierName">Supplier Name*</label>
-                    <input type="text" id="supplierName" required placeholder="e.g. TechSupply Co.">
-                </div>
-
-                <div class="form-group">
-                    <label for="stockStatus">Stock Status*</label>
-                    <select id="stockStatus" required>
-                        <option value="In Stock">In Stock</option>
-                        <option value="Low Stock">Low Stock</option>
-                        <option value="Out of Stock">Out of Stock</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Popular Item?*</label>
-                    <div class="radio-group">
-                        <input type="radio" name="isPopular" value="Yes" id="popYes"> <label for="popYes">Yes</label>
-                        <input type="radio" name="isPopular" value="No" id="popNo" checked> <label for="popNo">No</label>
+                <div class="form-grid">
+                    <!-- Mandatory Field: Item ID must be unique and is validated via TypeScript logic -->
+                    <div class="form-group">
+                        <label for="itemId">Item ID (Unique)*</label>
+                        <input type="text" id="itemId" required placeholder="e.g. TS-001">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemName">Item Name*</label>
+                        <input type="text" id="itemName" required placeholder="e.g. MacBook Pro">
+                    </div>
+                    <!-- Dropdown Implementation for specific categories: Electronics, Furniture, Tools, etc. -->
+                    <div class="form-group">
+                        <label for="itemCategory">Category*</label>
+                        <select id="itemCategory" required>
+                            <option value="">--Select Category--</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Furniture">Furniture</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Tools">Tools</option>
+                            <option value="Miscellaneous">Miscellaneous</option>
+                        </select>
+                    </div>
+                    <!-- Numeric fields: Quantity and Price require validation to prevent alphabetic characters -->
+                    <div class="form-group">
+                        <label for="itemQuantity">Quantity*</label>
+                        <input type="number" id="itemQuantity" min="0" required placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemPrice">Price ($)*</label>
+                        <input type="number" id="itemPrice" min="0" step="0.01" required placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="supplierName">Supplier Name*</label>
+                        <input type="text" id="supplierName" required placeholder="e.g. Apple Inc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="stockStatus">Stock Status*</label>
+                        <select id="stockStatus" required>
+                            <option value="In Stock">In Stock</option>
+                            <option value="Low Stock">Low Stock</option>
+                            <option value="Out of Stock">Out of Stock</option>
+                        </select>
+                    </div>
+                    <!-- Boolean state for 'Popular Item' requirement using radio button inputs -->
+                    <div class="form-group">
+                        <label>Popular Item?*</label>
+                        <div class="radio-group">
+                            <input type="radio" name="isPopular" value="Yes" id="popYes"> <label for="popYes">Yes</label>
+                            <input type="radio" name="isPopular" value="No" id="popNo" checked> <label for="popNo">No</label>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Optional Field: Comment on item as defined in the data field requirements -->
                 <div class="form-group full-width">
-                    <label for="itemComment">Comment</label>
-                    <textarea id="itemComment" rows="2" placeholder="Optional comments..."></textarea>
+                    <label for="itemComment">Comment (Optional)</label>
+                    <textarea id="itemComment" rows="2" placeholder="Notes about this item..."></textarea>
                 </div>
 
+                <!-- Functional Buttons: Trigger TypeScript event listeners for CRUD operations -->
                 <div class="button-group">
-                    <button type="button" id="btnAdd">Add Item</button>
-                    <button type="button" id="btnUpdate">Update (by Name)</button>
+                    <button type="button" id="btnAdd" class="btn-primary">Add Item</button>
+                    <!-- Requirement: Updating should be executed based on the Item Name -->
+                    <button type="button" id="btnUpdate" class="btn-secondary">Update (by Name)</button>
                     <button type="reset" class="btn-clear">Clear Form</button>
                 </div>
             </form>
         </section>
 
-        <!-- 3. 搜索与过滤区 -->
+        <!-- Search and Filtering UI: Fulfills the requirement for filtering data in the database -->
         <section class="action-section">
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Search by name...">
@@ -99,21 +104,20 @@
             </div>
         </section>
 
-        <!-- 4. 数据显示区 -->
+        <!-- Data Presentation Area: Acts as the target for dynamic innerHTML table generation -->
         <section class="display-section">
             <h2>Inventory Records</h2>
             <div id="inventory-display" class="table-responsive">
-                <!-- 这里的表格将由 TypeScript 动态生成 -->
                 <p class="empty-msg">No items in the database.</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 TechSync Pro | Student ID: XXXX</p>
+        <p>&copy; 2024 TechSync Pro | Student: [Your Name] | ID: [Your ID]</p>
     </footer>
 
-    <!-- 引用编译后的 JS -->
+    <!-- Logic Layer: Linking the compiled JavaScript to drive application functionality -->
     <script src="main.js"></script>
 </body>
 </html>

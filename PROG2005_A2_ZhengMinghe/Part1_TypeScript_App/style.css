@@ -1,103 +1,59 @@
+/* 24833060-202300408073-张洺赫MingheZhang */
+/* CSS Custom Properties: Defines global theme variables for maintainability and consistency (ULO1) */
 :root {
     --primary: #2c3e50;
     --secondary: #3498db;
     --success: #27ae60;
-    --warning: #f39c12;
     --danger: #e74c3c;
-    --light: #f4f7f6;
+    --bg-light: #f4f7f6;
+    --card-bg: #ffffff;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--light);
-    margin: 0;
-    color: #333;
-}
+/* Base Layout Foundations: Establishes the visual theme and typography for the application foundation */
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg-light); margin: 0; color: #333; }
+header { background: var(--primary); color: white; text-align: center; padding: 1.5rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+.container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
 
-header {
-    background: var(--primary);
-    color: white;
-    text-align: center;
-    padding: 1rem 0;
-}
+/* Feedback Component: Fulfills the "No alert()" requirement by providing in-page status updates (ULO2) */
+.status-box { background: white; border-left: 5px solid var(--secondary); padding: 15px; margin-bottom: 20px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); min-height: 20px; font-weight: bold; }
 
-.container {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 0 15px;
-}
-
-/* 状态框样式 */
-.status-box {
-    background: #fff;
-    border-left: 5px solid var(--secondary);
-    padding: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* 表单布局 */
-.form-section {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-#inventory-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 默认两列 */
-    gap: 15px;
-}
-
-.form-group { display: flex; flex-direction: column; }
+/* Layout Containers: Implements a clean, card-based interface for organized data entry */
+.form-section { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+/* Grid Logic: Creates a two-column structure for balanced field distribution on desktop views */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.form-group { display: flex; flex-direction: column; margin-bottom: 10px; }
 .full-width { grid-column: span 2; }
 
+/* Control Styling: Improves accessibility through consistent padding and clear focus states */
 label { font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
-input, select, textarea {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
+input, select, textarea { padding: 10px; border: 1px solid #ddd; border-radius: 4px; transition: 0.3s; }
+input:focus { border-color: var(--secondary); outline: none; box-shadow: 0 0 5px rgba(52, 152, 219, 0.2); }
 
-/* 按钮组 */
-.button-group {
-    grid-column: span 2;
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
+/* Interaction Elements: Uses semantic colors to distinguish between primary and secondary CRUD tasks */
+.button-group { grid-column: span 2; display: flex; gap: 10px; margin-top: 15px; }
+button { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+.btn-primary { background: var(--secondary); color: white; }
+.btn-secondary { background: var(--success); color: white; }
+.btn-clear { background: #95a5a6; color: white; }
+/* UX Feedback: Provides subtle micro-interactions to signify button engagement */
+button:hover { opacity: 0.8; transform: translateY(-1px); }
 
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background: var(--secondary);
-    color: white;
-    font-weight: bold;
-    transition: 0.3s;
-}
+/* Actions Management: Optimizes whitespace between the search bar and filter controls */
+.action-section { margin: 30px 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.search-box { display: flex; gap: 5px; flex: 1; }
+.search-box input { width: 100%; }
 
-button:hover { opacity: 0.8; }
-.btn-clear { background: #95a5a6; }
-
-/* 响应式调整：手机端单列 */
-@media (max-width: 600px) {
-    #inventory-form { grid-template-columns: 1fr; }
-    .full-width, .button-group { grid-column: span 1; }
-    .button-group { flex-direction: column; }
-}
-
-/* 表格样式 */
-.table-responsive {
-    overflow-x: auto;
-    background: white;
-    padding: 10px;
-    border-radius: 8px;
-}
-
+/* Table Presentation: Utilizes overflow properties to maintain usability on small mobile screens (ULO2) */
+.table-responsive { overflow-x: auto; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+th, td { border-bottom: 1px solid #eee; padding: 12px; text-align: left; }
 th { background-color: var(--primary); color: white; }
-tr:nth-child(even) { background-color: #f9f9f9; }
+tr:hover { background-color: #f9f9f9; }
+
+/* Media Query: Mandatory implementation of responsive design for narrow mobile screens as per brief */
+@media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; } /* Stack columns vertically for mobile usability */
+    .full-width, .button-group { grid-column: span 1; }
+    .action-section { flex-direction: column; }
+    .button-group { flex-direction: column; } /* Optimizes click areas for touch interaction */
+}

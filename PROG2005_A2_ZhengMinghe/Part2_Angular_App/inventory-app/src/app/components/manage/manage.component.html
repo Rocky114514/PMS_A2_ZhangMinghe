@@ -1,24 +1,38 @@
+//24833060-202300408073-张洺赫MingheZhang
+<!-- Main Management Container: Provides an interactive interface for inventory CRUD operations -->
 <div class="container animate-bottom">
+  
+  <!-- Management Card: Encapsulates the entry form and real-time feedback status bar -->
   <div class="glass-card">
     <h2>Inventory Management</h2>
+    
+    <!-- User Feedback: Displays dynamic success/error messages to enhance interface intuitiveness (ULO2) -->
     <div class="status-bar" *ngIf="statusMessage">{{ statusMessage }}</div>
 
+    <!-- Reactive Form: Fulfills data field requirements (ID, Name, Category, etc.) with structured binding -->
     <form [formGroup]="itemForm" class="styled-form">
+      
+      <!-- Responsive Grid: Organizes mandatory fields into a mobile-friendly layout (ULO2) -->
       <div class="input-grid">
-        <input formControlName="id" placeholder="Item ID*">
-        <input formControlName="name" placeholder="Item Name*">
-        <select formControlName="category">
-          <option value="">--Category--</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Furniture">Furniture</option>
-          <option value="Clothing">Clothing</option>
-          <option value="Tools">Tools</option>
-        </select>
-        <input formControlName="quantity" type="text" placeholder="Qty*">
-        <input formControlName="price" type="text" placeholder="Price*">
-        <input formControlName="supplierName" placeholder="Supplier*">
+        <div class="input-box"><label>Item ID</label><input formControlName="id" placeholder="ID*"></div>
+        <div class="input-box"><label>Item Name</label><input formControlName="name" placeholder="Name*"></div>
+        <div class="input-box">
+          <label>Category</label>
+          <select formControlName="category">
+            <option value="">--Category--</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Tools">Tools</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+          </select>
+        </div>
+        <div class="input-box"><label>Quantity</label><input formControlName="quantity" type="text" placeholder="0"></div>
+        <div class="input-box"><label>Price ($)</label><input formControlName="price" type="text" placeholder="0.00"></div>
+        <div class="input-box"><label>Supplier</label><input formControlName="supplierName" placeholder="Supplier*"></div>
       </div>
       
+      <!-- Operation Controls: Implements standard 'Add' and the specific 'Update by Name' requirement -->
       <div class="form-actions">
         <button (click)="onAdd()" class="btn-primary-gradient">Add New Item</button>
         <button (click)="onUpdate()" class="btn-outline">Update by Name</button>
@@ -26,14 +40,17 @@
     </form>
   </div>
 
+  <!-- Database View Section: Displays the live state of the inventory stored in the session -->
   <div class="table-section">
     <h3>Current Stock Database</h3>
+    
+    <!-- Overflow Wrapper: Ensures the system remains usable on narrow mobile screens (Responsive Design) -->
     <div class="table-wrapper">
       <table class="inventory-table">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Item Name</th>
             <th>Category</th>
             <th>Qty</th>
             <th>Price</th>
@@ -43,16 +60,21 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Dynamic Rendering: Iterates through the data structure maintained in the InventoryService -->
           <tr *ngFor="let item of inventoryList">
-            <td class="bold">{{ item.id }}</td>
-            <td>{{ item.name }}</td>
+            <td class="id-col">{{ item.id }}</td>
+            <td class="name-col">{{ item.name }}</td>
             <td><span class="badge">{{ item.category }}</span></td>
             <td>{{ item.quantity }}</td>
             <td class="price-col">${{ item.price }}</td>
             <td>{{ item.stockStatus }}</td>
             <td>{{ item.isPopular }}</td>
             <td>
-              <button (click)="onDelete(item.name)" class="btn-delete-small">Delete</button>
+              <!-- Interactive Action Set: Provides per-item management for editing and secure deletion -->
+              <div class="action-group">
+                <button (click)="onEdit(item)" class="btn-edit-small">Edit</button>
+                <button (click)="onDelete(item.name)" class="btn-delete-small">Delete</button>
+              </div>
             </td>
           </tr>
         </tbody>

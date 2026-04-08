@@ -1,32 +1,33 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
+//24833060-202300408073-张洺赫MingheZhang
+/* For more information on this file, see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "strict": true,
+    "outDir": "./dist/out-tsc", // Directory for compiled JavaScript output files
+    "strict": true, // Enable all strict type-checking to ensure code robustness and data integrity
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "sourceMap": true,
+    "sourceMap": true, // Generate map files for debugging TypeScript source directly in the browser
     "declaration": false,
-    "experimentalDecorators": true,
+    "experimentalDecorators": true, // Support for decorators, essential for Angular's dependency injection
     "moduleResolution": "bundler",
     "importHelpers": true,
-    "target": "ES2022",
+    "target": "ES2022", // Transpile to ES2022 for a balance of performance and modern browser compatibility
     "module": "ES2022",
     "useDefineForClassFields": false,
     "lib": [
-      "ES2022",
-      "dom"
+      "ES2022", // Include modern ES2022 standard library
+      "dom" // Include browser DOM definitions for web element manipulation
     ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true // Enable strict type checking for HTML templates to prevent rendering errors
   }
 }

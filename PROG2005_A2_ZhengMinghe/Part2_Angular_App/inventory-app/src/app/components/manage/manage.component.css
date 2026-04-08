@@ -1,51 +1,119 @@
-/* 表格容器样式 */
-.table-section { margin-top: 40px; }
-.table-wrapper {
+/*24833060-202300408073-z张洺赫MingheZhang*/
+/* Main Layout: Ensures the content is centered and maintains optimal readability across devices */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Form Container: Employs a modern card-based design with subtle shadows for a clean user interface */
+.glass-card {
   background: white;
-  border-radius: 20px;
-  overflow-x: auto; /* 关键：移动端左右滑动 */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+  margin-bottom: 40px;
 }
 
-.inventory-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 800px; /* 保证列不被挤压 */
-}
-
-.inventory-table th {
-  background-color: #f8f9fa;
-  color: #7f8c8d;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 15px 20px;
-  text-align: left;
-}
-
-.inventory-table td {
-  padding: 15px 20px;
-  border-bottom: 1px solid #f1f1f1;
-  font-size: 0.9rem;
-}
-
-.inventory-table tr:last-child td { border: none; }
-.inventory-table tr:hover { background-color: #fbfbfd; }
-
-/* 装饰性列样式 */
-.bold { font-weight: 700; color: #2c3e50; }
-.price-col { font-weight: 800; color: #764ba2; }
-.badge {
-  background: #f0f2f5;
-  padding: 4px 10px;
-  border-radius: 8px;
-  font-size: 0.7rem;
+/* Feedback Mechanism: Provides clear visual status updates to the user following data operations */
+.status-bar {
+  background: rgba(118, 75, 162, 0.05);
+  color: #764ba2;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 20px;
   font-weight: 600;
 }
 
-.btn-delete-small {
-  background: #fff1f0;
-  color: #ff4d4f;
-  padding: 5px 12px;
-  font-size: 0.75rem;
+/* Form Grid: Utilizes CSS Grid with auto-fit to ensure the form remains responsive on mobile screens */
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
 }
+
+.input-box { display: flex; flex-direction: column; }
+.input-box label { font-size: 0.75rem; font-weight: 700; color: #888; margin-bottom: 5px; }
+
+/* Input Styling: Enhances usability through consistent padding and rounded corners */
+input, select {
+  padding: 12px;
+  border-radius: 10px;
+  background: #f5f5f7;
+  border: 1px solid transparent;
+  transition: 0.3s;
+}
+
+/* Focus State: Improves accessibility by providing visual cues when an element is active */
+input:focus { background: white; border-color: #764ba2; outline: none; }
+
+/* Action Area: Uses Flexbox to align buttons and ensures high-contrast gradients for primary tasks */
+.form-actions { margin-top: 20px; display: flex; gap: 10px; }
+.btn-primary-gradient { background: linear-gradient(135deg, #667eea, #764ba2); color: white; flex: 2; padding: 15px; }
+.btn-outline { background: white; border: 2px solid #764ba2; color: #764ba2; flex: 1; }
+
+.table-section { width: 100%; margin-top: 20px; }
+
+/* Responsive Table Wrapper: Critical for mobile systems to allow horizontal scrolling on narrow screens */
+.table-wrapper {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  overflow-x: auto; 
+}
+
+/* Data Table Architecture: Structured for high-density information display while maintaining spacing */
+.inventory-table {
+  width: 100%;               
+  border-collapse: collapse;
+  min-width: 1000px;         
+}
+
+/* Header Styles: Uses uppercase and tracking to distinguish structural labels from data records */
+.inventory-table th {
+  background-color: #fcfcfd;
+  color: #888;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 20px 25px;
+  text-align: center;
+  border-bottom: 2px solid #f5f5f7;
+}
+
+/* Row Styling: Ensures alignment and readability through consistent cell padding */
+.inventory-table td {
+  padding: 18px 25px;
+  text-align: center;
+  border-bottom: 1px solid #f5f5f7;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  white-space: nowrap;      
+}
+
+.inventory-table tr:hover { background-color: #fbfbfd; }
+
+/* Visual Hierarchy: Specific font weights applied to key fields for faster data scanning */
+.id-col { font-weight: 800; color: #764ba2; }
+.name-col { font-weight: 700; text-align: left !important; } 
+.price-col { font-weight: 800; color: #27ae60; }
+
+/* Semantic UI: Uses badges for categories to group items visually and logically */
+.badge {
+  background: #f0f2f5;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* Interaction Grouping: Clusters management buttons to provide a unified control set per row */
+.action-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btn-edit-small { background: #e6f7ff; color: #1890ff; padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; }
+.btn-delete-small { background: #fff1f0; color: #ff4d4f; padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; }

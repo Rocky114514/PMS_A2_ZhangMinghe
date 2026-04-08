@@ -1,7 +1,10 @@
+/*24833060-202300408073-z张洺赫MingheZhang*/
+/* Hero section styling to create a professional first impression using high-end typography */
 .hero { text-align: center; margin-top: 50px; }
 .hero h1 { font-size: 4rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 0; }
 .subtitle { color: var(--text-muted); font-size: 1.2rem; margin-top: 10px; }
 
+/* Flexbox layout for the dashboard to ensure balanced spacing between overview components */
 .dashboard {
   display: flex;
   gap: 30px;
@@ -9,6 +12,7 @@
   margin-top: 60px;
 }
 
+/* Card-based design utilizing soft shadows and rounded corners for a modern aesthetic (ULO2) */
 .stat-card {
   background: white;
   padding: 50px 40px; 
@@ -17,7 +21,7 @@
   text-align: center;
   box-shadow: 0 20px 40px rgba(0,0,0,0.03);
   
-  
+  /* Centering card content vertically and horizontally for visual consistency */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,6 +29,7 @@
   transition: 0.3s;
 }
 
+/* Micro-interaction: Subtle lift effect on hover to provide tactile user feedback */
 .stat-card:hover {
   transform: translateY(-10px);
 }
@@ -36,6 +41,7 @@
   color: #7f8c8d;
 }
 
+/* High-impact Call-to-Action (CTA) button with gradient and smooth transition curves */
 .btn-cta {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -51,10 +57,12 @@
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+/* Responsive scaling on hover to enhance navigation intuitiveness */
 .btn-cta:hover {
   transform: scale(1.1); 
   box-shadow: 0 15px 35px rgba(118, 75, 162, 0.4);
   letter-spacing: 1px; 
 }
 
+/* Emphasized font for count metrics to ensure immediate readability of system data */
 .count { font-size: 4rem; font-weight: 800; color: var(--accent); display: block; }

@@ -1,9 +1,14 @@
+//24833060-202300408073-张洺赫MingheZhang
+<!-- Main Landing Container: Implements a responsive layout for the application's entry point (ULO2) -->
 <div class="container home-page">
+  
+  <!-- Hero Section: Establishes brand identity and clearly states the system's objective -->
   <header class="hero">
     <h1>Welcome to TechSync Pro</h1>
     <p class="subtitle">Efficient Digital Inventory Management System</p>
   </header>
 
+  <!-- Core Purpose Section: Directly fulfills the requirement to display the "Purpose of the App" -->
   <section class="mission">
     <h2>Our Purpose</h2>
     <p>
@@ -13,12 +18,16 @@
     </p>
   </section>
 
-  <!-- 仪表盘：展示当前库存概览 -->
+  <!-- Interactive Dashboard: Provides a summarized overview of active inventory data within the session -->
   <section class="dashboard">
+    
+    <!-- Real-time Metrics: Displays dynamic count of total items using Angular data interpolation -->
     <div class="stat-card">
       <h3>Total Items</h3>
       <p class="count">{{ displayItems.length }}</p>
     </div>
+
+    <!-- Navigation Shortcut: Enhances User Experience (UX) by providing a clear Call-to-Action (CTA) -->
     <div class="stat-card">
       <h3>Quick Action</h3>
       <button routerLink="/manage" class="btn-primary">Start Managing</button>

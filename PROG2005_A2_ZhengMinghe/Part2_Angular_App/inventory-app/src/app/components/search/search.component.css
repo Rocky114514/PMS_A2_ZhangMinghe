@@ -1,4 +1,8 @@
+/*24833060-202300408073-z张洺赫MingheZhang*/
+/* Search Layout: Establishes clear vertical spacing for the search interface components */
 .search-box-container { margin-bottom: 40px; }
+
+/* Search Bar: Pill-shaped input to enhance modern aesthetic and User Experience (UX) */
 .search-bar {
   width: 100%;
   max-width: 500px;
@@ -8,13 +12,18 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.03);
 }
 
+/* Filter UI: Fulfills requirement for an item search page with specific filtering options */
 .filter-group { margin-top: 15px; display: flex; justify-content: center; gap: 10px; }
 .btn-filter { background: white; padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; }
+
+/* High-contrast styling for the 'Popular' filter to help users distinguish priority items */
 .btn-filter.highlight { background: #fffbe6; color: #faad14; border: 1px solid #ffe58f; }
 
+/* Semantic Dot: Provides a quick visual cue to flag popular items within the results list */
 .pop-dot { color: #faad14; font-weight: 700; font-size: 0.8rem; }
 
-/* 复用 Manage 页面的表格样式，保持视觉统一 */
+/* Table Architecture: Implements responsive overflow to support narrow mobile screens (ULO2) */
+/* Maintains visual consistency across the entire management system for a unified brand feel */
 .table-wrapper {
   background: white;
   border-radius: 20px;

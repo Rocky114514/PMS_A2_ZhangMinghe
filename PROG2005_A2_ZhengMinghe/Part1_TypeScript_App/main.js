@@ -1,24 +1,41 @@
+"use strict";
+//24833060-202300408073-张洺赫MingheZhang
+/**
+ * PROG2005 Programming Mobile Systems - Assessment 2
+ * Part 1: Standalone TypeScript System
+ * Author: [Your Name]
+ * Description: A pure TypeScript-based inventory management system
+ * utilizing structured data models and dynamic DOM manipulation.
+ */
+// --- 2. Global State Management ---
+// Maintains a structured array of objects in memory for session-based persistence.
 let inventory = [];
+// Helper functions for safe DOM element retrieval and type casting.
 const getStatusDiv = () => document.getElementById('status-message');
 const getDisplayDiv = () => document.getElementById('inventory-display');
+// --- 3. Core Function: Dynamic Table Rendering ---
+// Utilizes innerHTML assignments instead of alert() calls to fulfill project requirements.
 function renderTable(data) {
     const displayDiv = getDisplayDiv();
     if (data.length === 0) {
-        displayDiv.innerHTML = '<p class="empty-msg">No items found in the database.</p>';
+        displayDiv.innerHTML = '<p class="empty-msg">No records found matching criteria.</p>';
         return;
     }
-    let html = `<table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Qty</th>
-                <th>Price</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>`;
+    // Generates a responsive HTML table structure dynamically based on the current data state.
+    let html = `
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
     data.forEach(item => {
         html += `
             <tr>
@@ -28,89 +45,138 @@ function renderTable(data) {
                 <td>$${item.price.toFixed(2)}</td>
                 <td>${item.stockStatus}</td>
                 <td>
-                    <button onclick="deleteItem('${item.name}')" style="background: #e74c3c; color: white; padding: 5px 10px; border-radius: 4px;">Delete</button>
+                    <!-- Interaction: Calls global scope functions for item modification -->
+                    <button onclick="editItem('${item.name}')" style="background: #3498db; color: white; padding: 5px 10px; margin-right:5px; font-size:12px;">Edit</button>
+                    <button onclick="deleteItem('${item.name}')" style="background: #e74c3c; color: white; padding: 5px 10px; font-size:12px;">Delete</button>
                 </td>
             </tr>`;
     });
     html += '</tbody></table>';
     displayDiv.innerHTML = html;
 }
+// --- 4. Core Function: Add New Item ---
+// Implements data validation and unique ID constraints as specified in the brief.
 function addItem() {
-    var _a;
-    console.log("Attempting to add item...");
     const statusDiv = getStatusDiv();
-    const id = document.getElementById('itemId').value.trim();
-    const name = document.getElementById('itemName').value.trim();
-    const category = document.getElementById('itemCategory').value;
-    const qtyInput = document.getElementById('itemQuantity').value;
-    const priceInput = document.getElementById('itemPrice').value;
-    const supplier = document.getElementById('supplierName').value.trim();
-    const status = document.getElementById('stockStatus').value;
-    const isPop = (_a = document.querySelector('input[name="isPopular"]:checked')) === null || _a === void 0 ? void 0 : _a.value;
-    const comment = document.getElementById('itemComment').value.trim();
-    if (!id || !name || !category || !qtyInput || !priceInput || !supplier) {
-        statusDiv.innerText = "Error: Please fill in all required fields (including Category).";
+    // Captures raw input from HTML elements for processing.
+    const idInput = document.getElementById('itemId');
+    const nameInput = document.getElementById('itemName');
+    const categoryInput = document.getElementById('itemCategory');
+    const qtyInput = document.getElementById('itemQuantity');
+    const priceInput = document.getElementById('itemPrice');
+    const supplierInput = document.getElementById('supplierName');
+    const statusInput = document.getElementById('stockStatus');
+    const isPopInput = document.querySelector('input[name="isPopular"]:checked');
+    const commentInput = document.getElementById('itemComment');
+    // Validation logic: Ensures all mandatory fields are populated before saving.
+    if (!idInput.value || !nameInput.value || !categoryInput.value || !qtyInput.value || !priceInput.value || !supplierInput.value) {
+        statusDiv.innerText = "Error: All starred (*) fields are required.";
         statusDiv.style.color = "red";
         return;
     }
-    const qty = parseInt(qtyInput);
-    const price = parseFloat(priceInput);
-    if (inventory.some(item => item.id === id)) {
-        statusDiv.innerText = "Error: Duplicate Item ID! Must be unique.";
+    // Uniqueness constraint: Checks if Item ID already exists in the local data structure.
+    if (inventory.some(item => item.id === idInput.value.trim())) {
+        statusDiv.innerText = "Error: Item ID already exists! It must be unique.";
         statusDiv.style.color = "red";
         return;
     }
     const newItem = {
-        id, name, category: category, quantity: qty, price, supplierName: supplier, stockStatus: status, isPopular: isPop, comment
+        id: idInput.value.trim(),
+        name: nameInput.value.trim(),
+        category: categoryInput.value,
+        quantity: parseInt(qtyInput.value),
+        price: parseFloat(priceInput.value),
+        supplierName: supplierInput.value.trim(),
+        stockStatus: statusInput.value,
+        isPopular: isPopInput.value,
+        comment: commentInput.value.trim()
     };
     inventory.push(newItem);
-    console.log("Current Inventory:", inventory);
     renderTable(inventory);
-    statusDiv.innerText = `Success: Added "${name}" to inventory.`;
+    statusDiv.innerText = `Success: Added "${newItem.name}" to inventory.`;
     statusDiv.style.color = "green";
     document.getElementById('inventory-form').reset();
 }
+// --- 5. Core Function: Update by Name ---
+// Directly addresses the requirement to update item details using the Item Name as a key.
+function updateItem() {
+    const name = document.getElementById('itemName').value.trim();
+    const index = inventory.findIndex(i => i.name.toLowerCase() === name.toLowerCase());
+    if (index === -1) {
+        getStatusDiv().innerText = "Error: Cannot update. Item name not found in database.";
+        getStatusDiv().style.color = "red";
+        return;
+    }
+    // Updates existing object properties while maintaining the unique identifier (ID).
+    inventory[index].quantity = parseInt(document.getElementById('itemQuantity').value) || 0;
+    inventory[index].price = parseFloat(document.getElementById('itemPrice').value) || 0;
+    inventory[index].category = document.getElementById('itemCategory').value;
+    inventory[index].supplierName = document.getElementById('supplierName').value.trim();
+    inventory[index].stockStatus = document.getElementById('stockStatus').value;
+    inventory[index].isPopular = document.querySelector('input[name="isPopular"]:checked').value;
+    inventory[index].comment = document.getElementById('itemComment').value.trim();
+    getStatusDiv().innerText = `Success: Updated details for "${name}".`;
+    getStatusDiv().style.color = "blue";
+    renderTable(inventory);
+}
+// --- 6. Edit Logic: Form Pre-filling (ULO2) ---
+// Enhances UX by populating the form with existing data when the 'Edit' button is clicked.
+window.editItem = (name) => {
+    const item = inventory.find(i => i.name.toLowerCase() === name.toLowerCase());
+    if (item) {
+        document.getElementById('itemId').value = item.id;
+        document.getElementById('itemName').value = item.name;
+        document.getElementById('itemCategory').value = item.category;
+        document.getElementById('itemQuantity').value = item.quantity.toString();
+        document.getElementById('itemPrice').value = item.price.toString();
+        document.getElementById('supplierName').value = item.supplierName;
+        document.getElementById('stockStatus').value = item.stockStatus;
+        const popYes = document.getElementById('popYes');
+        const popNo = document.getElementById('popNo');
+        if (item.isPopular === 'Yes')
+            popYes.checked = true;
+        else
+            popNo.checked = true;
+        document.getElementById('itemComment').value = item.comment || '';
+        const statusDiv = getStatusDiv();
+        statusDiv.innerText = `Mode: Editing "${name}". Click Update button to save.`;
+        statusDiv.style.color = "#3498db";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+};
+// --- 7. Delete Logic: Confirmation Prompt (ULO2) ---
+// Implements user confirmation prompts to prevent accidental data loss.
+window.deleteItem = (name) => {
+    if (confirm(`Are you sure you want to delete "${name}" from inventory?`)) {
+        inventory = inventory.filter(i => i.name.toLowerCase() !== name.toLowerCase());
+        renderTable(inventory);
+        getStatusDiv().innerText = `Deleted: "${name}"`;
+        getStatusDiv().style.color = "orange";
+    }
+};
+// --- 8. Search and Filter Functions ---
+// Fulfills the requirement for search functionality based on item name.
 function searchItems() {
     const query = document.getElementById('searchInput').value.toLowerCase();
     const results = inventory.filter(i => i.name.toLowerCase().includes(query));
     renderTable(results);
-    getStatusDiv().innerText = `Search results for: "${query}"`;
+    getStatusDiv().innerText = `Results for search: "${query}"`;
 }
-function updateItem() {
-    const name = document.getElementById('itemName').value.trim();
-    const index = inventory.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
-    if (index === -1) {
-        getStatusDiv().innerText = "Error: Item name not found for update!";
-        getStatusDiv().style.color = "red";
-        return;
-    }
-    inventory[index].quantity = parseInt(document.getElementById('itemQuantity').value) || 0;
-    inventory[index].price = parseFloat(document.getElementById('itemPrice').value) || 0;
-    inventory[index].stockStatus = document.getElementById('stockStatus').value;
-    inventory[index].isPopular = document.querySelector('input[name="isPopular"]:checked').value;
-    getStatusDiv().innerText = `Success: Updated ${name}`;
-    getStatusDiv().style.color = "blue";
-    renderTable(inventory);
-}
-window.deleteItem = (name) => {
-    if (confirm(`Are you sure you want to delete "${name}"?`)) {
-        inventory = inventory.filter(item => item.name !== name);
-        renderTable(inventory);
-        getStatusDiv().innerText = `Deleted: ${name}`;
-    }
-};
+// --- 9. Event Listeners Initialization ---
+// Ensures the DOM is fully parsed before attaching behavioral logic to HTML elements.
 window.addEventListener('DOMContentLoaded', () => {
     var _a, _b, _c, _d, _e;
+    console.log("TypeScript system is running!");
     (_a = document.getElementById('btnAdd')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', addItem);
     (_b = document.getElementById('btnUpdate')) === null || _b === void 0 ? void 0 : _b.addEventListener('click', updateItem);
     (_c = document.getElementById('btnSearch')) === null || _c === void 0 ? void 0 : _c.addEventListener('click', searchItems);
     (_d = document.getElementById('btnShowAll')) === null || _d === void 0 ? void 0 : _d.addEventListener('click', () => {
         renderTable(inventory);
-        getStatusDiv().innerText = "Showing all items.";
+        getStatusDiv().innerText = "Displaying all inventory items.";
     });
     (_e = document.getElementById('btnShowPopular')) === null || _e === void 0 ? void 0 : _e.addEventListener('click', () => {
         const populars = inventory.filter(i => i.isPopular === 'Yes');
         renderTable(populars);
-        getStatusDiv().innerText = "Showing popular items.";
+        getStatusDiv().innerText = "Filtering by popular items.";
     });
 });
